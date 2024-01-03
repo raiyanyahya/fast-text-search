@@ -1,4 +1,4 @@
-# fast-text-search
+#  ☄️ fast-text-search
 
 A go package to do extremely fast concurrent text search across files and folders.
 
@@ -25,7 +25,8 @@ var (
 
 func main(){
     
-    hits := fts.FTS(searchString, SearchDirectory, IgnoreExt, IgnoreFolders, FileName, ExtensionType)
+    hits := fts.FTS(searchString, SearchDirectory, IgnoreExt, IgnoreFolders, 
+            FileName, ExtensionType)
 
 }
 
