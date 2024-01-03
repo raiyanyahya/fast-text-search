@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fast-test-search/fts"
+	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -25,7 +26,8 @@ var rootCmd = &cobra.Command{
 	Short:         "Fast Text Search",
 	Long:          "Extremely fast and concurrent text search in Go",
 	Run: func(cmd *cobra.Command, args []string) {
-		fts.FTS(SearchString, SearchDirectory, IgnoreExt, IgnoreFolders, FileName, ExtensionType)
+		hits := fts.FTS(SearchString, SearchDirectory, IgnoreExt, IgnoreFolders, FileName, ExtensionType)
+		fmt.Println(hits)
 	},
 	SilenceUsage: true,
 }

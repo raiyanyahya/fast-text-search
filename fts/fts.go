@@ -48,9 +48,9 @@ func containsExt(s []string, str string) bool {
 	}
 	return false
 }
-func FTS(searchString string, searchDirectory string, ignoreExt []string, ignoreFolders []string, fileName string, extensionType string) {
+func FTS(searchString string, searchDirectory string, ignoreExt []string, ignoreFolders []string, fileName string, extensionType string) []string {
 	var files []string
-
+	var result []string
 	if len(searchString) <= 0 {
 		fmt.Println("Please provide a search string")
 	}
@@ -112,9 +112,10 @@ func FTS(searchString string, searchDirectory string, ignoreExt []string, ignore
 			defer wg.Done()
 			exists := IsExist(searchString, file)
 			if exists {
-				fmt.Println(file)
+				result = append(result, file)
 			}
 		}(file)
 	}
 	wg.Wait()
+	return result
 }
