@@ -3,6 +3,7 @@
 A go package to do extremely fast concurrent text search across files and folders.
 
 ## Description
+
 Search for text recursively taking advantage of concurrency via GO routines. Import the project has a package and plugin the search functionality or use it as a command line application. Features options to ignore filetypes and directories during search. 
 
 
@@ -10,16 +11,16 @@ Search for text recursively taking advantage of concurrency via GO routines. Imp
 
 Use the file search logic and plug it in to existing codebases.
 
-```
+```golang
 import "github.com/raiyanyahya/fast-text-search/fts"
 
 var (
-	SearchString    string      // This is the string to search for [mandatory]
-	FileName        string      // The filename to look in
-	ExtensionType   string      // Only search files with these extensions
-	IgnoreFolders   []string    // Exclude these directories while searching
+	SearchString    string      // String to search for [mandatory]
+	FileName        string      // Explicitly mention the filename to look in.
+	ExtensionType   string      // Only search files with these extensions.
+	IgnoreFolders   []string    // Exclude these directories while searching.
 	IgnoreExt       []string    // Do not open files with these extensions while searching.
-	SearchDirectory string      // The starting search directory
+	SearchDirectory string      // The starting search directory.
 )
 
 func main(){
@@ -34,8 +35,9 @@ func main(){
 
 You could also use this directly from the command line.
 
-```
-Extremely fast and concurrent text search in Go
+```bash
+
+Extremely fast and concurrent text search in Golang
 
 Usage:
   fts [flags]
@@ -46,8 +48,18 @@ Flags:
   -x, --extignore stringArray      The extension type to ignore during search
   -f, --file string                The file to seach in
   -i, --folderignore stringArray   The folders names to ignore during search
-  -h, --help                       help for ./fast-test-search
+  -h, --help                       help for fts
   -t, --text string                The string to search for
-  -v, --version                    version for ./fast-test-search
+  -v, --version                    version for fts
 ```
 
+## License
+FTS is a free for open-source projects, however, if you are using the library for business and commercial projects you could choose to buy me a coffee.
+
+## Contributing
+
+Contributions are always welcome!
+See contributing.md for ways to get started. Please adhere to this project's code of conduct.
+
+## Contact
+Contact me through email.
