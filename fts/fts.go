@@ -48,27 +48,27 @@ func containsExt(s []string, str string) bool {
 	}
 	return false
 }
-func FTS(SearchString string, SearchDirectory string, IgnoreExt []string, IgnoreFolders []string, FileName string, ExtensionType string) {
+func FTS(searchString string, searchDirectory string, ignoreExt []string, ignoreFolders []string, fileName string, extensionType string) {
 	var files []string
 
-	if len(SearchString) <= 0 {
+	if len(searchString) <= 0 {
 		fmt.Println("Please provide a search string")
 	}
-	if SearchDirectory == "." {
+	if searchDirectory == "." {
 		path, _ := os.Getwd()
-		SearchDirectory = path
+		searchDirectory = path
 	}
 
-	if len(IgnoreExt) > 0 {
-		ignore_extensions = append(ignore_extensions, IgnoreExt...)
+	if len(ignoreExt) > 0 {
+		ignore_extensions = append(ignore_extensions, ignoreExt...)
 	}
-	if len(IgnoreFolders) > 0 {
-		ignore_dirs = append(ignore_dirs, IgnoreFolders...)
+	if len(ignoreFolders) > 0 {
+		ignore_dirs = append(ignore_dirs, ignoreFolders...)
 	}
-	status_msg := fmt.Sprintf("Searching for text '%s' in directory '%s'.", SearchString, SearchDirectory)
+	status_msg := fmt.Sprintf("Searching for text '%s' in directory '%s'.", searchString, searchDirectory)
 	fmt.Println(status_msg)
 
-	err := filepath.Walk(SearchDirectory, func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(searchDirectory, func(path string, info os.FileInfo, err error) error {
 
 		if info.IsDir() && contains(ignore_dirs, info.Name()) {
 			return filepath.SkipDir
@@ -77,21 +77,21 @@ func FTS(SearchString string, SearchDirectory string, IgnoreExt []string, Ignore
 			fmt.Println("ignoring", info.Name())
 			return nil
 		}
-		if len(FileName) > 0 {
-			if !info.IsDir() && info.Name() == FileName {
+		if len(fileName) > 0 {
+			if !info.IsDir() && info.Name() == fileName {
 				files = append(files, path)
 			}
-		} else if len(ExtensionType) > 0 {
-			if !info.IsDir() && filepath.Ext(path) == ExtensionType {
-				files = append(files, path)
-
-			}
-		} else if len(ExtensionType) == 0 && len(FileName) > 0 {
-			if !info.IsDir() && info.Name() == FileName {
+		} else if len(extensionType) > 0 {
+			if !info.IsDir() && filepath.Ext(path) == extensionType {
 				files = append(files, path)
 
 			}
-		} else if len(ExtensionType) == 0 && len(FileName) == 0 {
+		} else if len(extensionType) == 0 && len(fileName) > 0 {
+			if !info.IsDir() && info.Name() == fileName {
+				files = append(files, path)
+
+			}
+		} else if len(extensionType) == 0 && len(fileName) == 0 {
 
 			if !info.IsDir() {
 				files = append(files, path)
@@ -110,7 +110,7 @@ func FTS(SearchString string, SearchDirectory string, IgnoreExt []string, Ignore
 		wg.Add(1)
 		go func(file string) {
 			defer wg.Done()
-			exists := IsExist(SearchString, file)
+			exists := IsExist(searchString, file)
 			if exists {
 				fmt.Println(file)
 			}
