@@ -53,6 +53,7 @@ func FTS(searchString string, searchDirectory string, ignoreExt []string, ignore
 	var result []string
 	if len(searchString) <= 0 {
 		fmt.Println("Please provide a search string")
+		return nil
 	}
 	if searchDirectory == "." {
 		path, _ := os.Getwd()
