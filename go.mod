@@ -1,4 +1,4 @@
-module fast-test-search
+module fast-text-search
 
 go 1.21.5
 
